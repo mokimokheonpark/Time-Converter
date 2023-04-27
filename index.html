@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="style.css">
+        <title>Time Converter</title>
+    </head>
+
+    <body>
+        <div id="root"></div>
+    </body>
+
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <script type="text/babel">
+
+        function SecondsToMinutes() {
+            const [value, setValue] = React.useState(0);
+            const [inverted, setInverted] = React.useState(false);
+        
+            const onChange = (event) => {
+                setValue(event.target.value);
+            };
+        
+            const reset = () => setValue(0);
+        
+            const onInvert = () => {
+                reset();
+                setInverted((current) => !current);
+            };
+        
+            return (
+                <div>
+                    <div>
+                        <label htmlFor="seconds">Seconds</label>
+                        <input
+                            value={inverted ? Number((value * 60).toFixed(2)) : value}
+                            id="seconds"
+                            placeholder="Seconds"
+                            type="number"
+                            onChange={onChange}
+                            disabled={inverted}
+                        />
+                    </div>
+        
+                    <div>
+                        <label htmlFor="minutes">Minutes</label>
+                        <input
+                            value={inverted ? value : Number((value / 60).toFixed(2))}
+                            id="minutes"
+                            placeholder="Minutes"
+                            type="number"
+                            onChange={onChange}
+                            disabled={!inverted}
+                        />
+                    </div>
+                    
+                    <button onClick={reset}>Reset</button>
+                    <button onClick={onInvert}>Invert</button>
+                </div>
+            );
+        }
+
+        function SecondsToHours() {
+            const [value, setValue] = React.useState(0);
+            const [inverted, setInverted] = React.useState(false);
+        
+            const onChange = (event) => {
+                setValue(event.target.value);
+            };
+        
+            const reset = () => setValue(0);
+        
+            const onInvert = () => {
+                reset();
+                setInverted((current) => !current);
+            };
+        
+            return (
+                <div>
+                    <div>
+                        <label htmlFor="seconds">Seconds</label>
+                        <input
+                            value={inverted ? Number((value * 3600).toFixed(2)) : value}
+                            id="seconds"
+                            placeholder="Seconds"
+                            type="number"
+                            onChange={onChange}
+                            disabled={inverted}
+                        />
+                    </div>
+        
+                    <div>
+                        <label htmlFor="hours">Hours</label>
+                        <input
+                            value={inverted ? value : Number((value / 3600).toFixed(2))}
+                            id="hours"
+                            placeholder="Hours"
+                            type="number"
+                            onChange={onChange}
+                            disabled={!inverted}
+                        />
+                    </div>
+                    
+                    <button onClick={reset}>Reset</button>
+                    <button onClick={onInvert}>Invert</button>
+                </div>
+            );
+        }
+
+        function MinutesToHours() {
+            const [value, setValue] = React.useState(0);
+            const [inverted, setInverted] = React.useState(false);
+        
+            const onChange = (event) => {
+                setValue(event.target.value);
+            };
+        
+            const reset = () => setValue(0);
+        
+            const onInvert = () => {
+                reset();
+                setInverted((current) => !current);
+            };
+        
+            return (
+                <div>
+                    <div>
+                        <label htmlFor="minutes">Minutes</label>
+                        <input
+                            value={inverted ? Number((value * 60).toFixed(2)) : value}
+                            id="minutes"
+                            placeholder="Minutes"
+                            type="number"
+                            onChange={onChange}
+                            disabled={inverted}
+                        />
+                    </div>
+        
+                    <div>
+                        <label htmlFor="hours">Hours</label>
+                        <input
+                            value={inverted ? value : Number((value / 60).toFixed(2))}
+                            id="hours"
+                            placeholder="Hours"
+                            type="number"
+                            onChange={onChange}
+                            disabled={!inverted}
+                        />
+                    </div>
+                    
+                    <button onClick={reset}>Reset</button>
+                    <button onClick={onInvert}>Invert</button>
+                </div>
+            );
+        }
+
+        function App() {
+            const [timeType, setTimeType] = React.useState("selection");
+
+            const onSelect = (event) => {
+                setTimeType(event.target.value);
+            }
+
+            return (
+                <div>
+                    <h1>Time Converter</h1>
+                    <select value={timeType} onChange={onSelect}>
+                        <option value="selection">Select Your Units</option>
+                        <option value="seconds and minutes">Seconds & Minutes</option>
+                        <option value="seconds and hours">Seconds & Hours</option>
+                        <option value="minutes and hours">Minutes & Hours</option>
+                    </select>
+                    <hr/>
+                    {timeType === "selection" ? "Please Select Your Units" : null}
+                    {timeType === "seconds and minutes" ? <SecondsToMinutes/> : null}
+                    {timeType === "seconds and hours" ? <SecondsToHours/> : null}
+                    {timeType === "minutes and hours" ? <MinutesToHours/> : null}
+                </div>
+            );
+        }
+    
+        const root = document.getElementById("root");
+        ReactDOM.render(<App/>, root);
+    </script>
+</html>
