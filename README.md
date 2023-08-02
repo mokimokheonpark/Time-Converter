@@ -1,3 +1,5 @@
 # Time-Converter
 
-Working on a React app that allows users to convert time between different units.
+Implemented a simple time converter app, practicing React.js.
+
+Feel free to explore the app and test its functionalities at https://mokimokheonpark.github.io/Time-Converter.
